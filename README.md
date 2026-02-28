@@ -1,5 +1,5 @@
 📌 Telegram YouTube Summarizer & Q&A Bot
-Eywa SDE Intern Assignment
+
 🚀 Project Overview
 
 This project is a Telegram-based AI assistant that helps users quickly understand long YouTube videos and interact with their content intelligently.
@@ -35,6 +35,7 @@ The goal is to build a Telegram bot that:
 🚫 Ensures grounded responses (no hallucinations)
 
 🧠 Core Features Implemented
+
 1️⃣ Structured Summary Generation
 
 When a user sends a YouTube link, the bot generates:
@@ -88,14 +89,22 @@ If a user asks a question in Hindi:
 This translation-layer architecture enables multilingual support even on low-resource systems.
 
 🏗 Architecture Design
+
 📂 Project Structure
+
 Summariser/
-│
+
+
 ├── bot.py           → Telegram bot logic and session handling
+
 ├── transcript.py    → Transcript extraction using yt-dlp
+
 ├── summarizer.py    → LLM interaction and structured prompts
+
 ├── config.py        → Token and model configuration
+
 └── README.md
+
 🔄 System Flow
 
 1️⃣ User sends a YouTube link
@@ -218,8 +227,11 @@ Copy the bot token
 Add it inside:
 
 config.py
+
 4️⃣ Run the Bot
 python bot.py
+
+
 ⚖ Design Trade-offs
 
 🧠 Lightweight model used due to 4GB RAM constraint
@@ -261,3 +273,4 @@ This system demonstrates:
 💻 Hardware-aware architecture design
 
 The solution is designed to be stable, scalable, and production-conscious even under constrained hardware resources.
+
