@@ -108,10 +108,15 @@ Summariser/
 🔄 System Flow
 
 1️⃣ User sends a YouTube link
+
 2️⃣ Transcript is extracted using yt-dlp
+
 3️⃣ Transcript is trimmed for memory efficiency
+
 4️⃣ Structured summary is generated using Ollama
+
 5️⃣ User asks follow-up questions
+
 6️⃣ Answers are generated using transcript context only
 
 ⚙️ Model & Environment
@@ -208,16 +213,19 @@ Advantages:
 1️⃣ Install Ollama
 
 Download from:
+
 https://ollama.com
 
 Pull the model:
 
 ollama pull phi3
+
 2️⃣ Install Python Dependencies
 
 Inside the project folder run:
 
 pip install python-telegram-bot requests yt-dlp
+
 3️⃣ Configure Telegram Bot
 
 Create a bot using BotFather on Telegram
@@ -273,4 +281,7 @@ This system demonstrates:
 💻 Hardware-aware architecture design
 
 The solution is designed to be stable, scalable, and production-conscious even under constrained hardware resources.
+
+
+
 
