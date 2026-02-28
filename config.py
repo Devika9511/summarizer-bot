@@ -1,0 +1,2 @@
+TELEGRAM_TOKEN = "Your Token"
+OLLAMA_MODEL =  "phi3"

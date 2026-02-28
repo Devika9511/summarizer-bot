@@ -1,281 +1,263 @@
-# 📌 Telegram YouTube Summarizer & Q&A Bot  
-### Eywa SDE Intern Assignment
+📌 Telegram YouTube Summarizer & Q&A Bot
+Eywa SDE Intern Assignment
+🚀 Project Overview
 
----
-
-## 🚀 Project Overview
-
-This project is a **Telegram-based AI assistant** that helps users quickly understand long YouTube videos and interact with their content intelligently.
+This project is a Telegram-based AI assistant that helps users quickly understand long YouTube videos and interact with their content intelligently.
 
 The bot can:
 
-- 🔗 Accept a YouTube link  
-- 📜 Extract the video transcript  
-- 🧾 Generate a structured summary  
-- ❓ Answer contextual follow-up questions  
-- 🌍 Support multilingual input (English + Hindi)
+🔗 Accept a YouTube link
 
-The system is designed to behave like a **lightweight AI research assistant for YouTube content**.
+📜 Extract the video transcript
 
----
+🧾 Generate a structured summary
 
-## 🎯 Objective
+❓ Answer contextual follow-up questions
+
+🌍 Support multilingual input (English + Hindi)
+
+The system is designed to behave like a lightweight AI research assistant for YouTube content.
+
+🎯 Objective
 
 The goal is to build a Telegram bot that:
 
-- 🔗 Accepts a YouTube link  
-- 📥 Fetches the video transcript  
-- 🧠 Generates a structured summary  
-- 💬 Allows contextual Q&A  
-- 🌐 Supports English and at least one Indian language  
-- 🚫 Ensures grounded responses (no hallucinations)
+🔗 Accepts a YouTube link
 
----
+📥 Fetches the video transcript
 
-## 🧠 Core Features Implemented
+🧠 Generates a structured summary
 
-### 1️⃣ Structured Summary Generation
+💬 Allows contextual Q&A
+
+🌐 Supports English and at least one Indian language
+
+🚫 Ensures grounded responses (no hallucinations)
+
+🧠 Core Features Implemented
+1️⃣ Structured Summary Generation
 
 When a user sends a YouTube link, the bot generates:
 
-- 🎥 **Video Title**
-- 📌 **5 Key Points**
-- ⏱ **Important Timestamps**
-- 🧠 **Core Takeaway**
+🎥 Video Title
 
-✔ The summary format is strictly enforced to avoid long paragraph outputs and improve clarity.
+📌 5 Key Points
 
----
+⏱ Important Timestamps
 
-### 2️⃣ Contextual Q&A (Grounded Responses)
+🧠 Core Takeaway
+
+✔ The summary format is strictly enforced to avoid long paragraph dumps and improve clarity.
+
+2️⃣ Contextual Q&A (Grounded Responses)
 
 Users can ask multiple follow-up questions about the video.
 
 The system ensures:
 
-- 📄 Answers are generated strictly using transcript content  
-- 🚫 No external knowledge is used  
+📄 Answers are generated strictly using transcript content
 
-If the information is not present in the transcript, the bot responds:
+🚫 No external knowledge is used
 
-```
-This topic is not covered in the video.
-```
+⚠ If the information is not present in the transcript, the bot responds:
 
-This ensures **zero hallucination behavior**.
+"This topic is not covered in the video."
 
----
+This ensures zero hallucination behavior.
 
-### 3️⃣ Multi-language Support
+3️⃣ Multi-language Support
 
 The bot supports:
 
-- 🇬🇧 English (default)
-- 🇮🇳 Hindi input
+🇬🇧 English (default)
 
-#### Implementation Approach
+🇮🇳 Hindi input
+
+Implementation Approach
 
 If a user asks a question in Hindi:
 
-- 🔄 Hindi question is translated into English
-- 🧠 Transcript-based reasoning is performed
-- 💬 Stable response is generated
-- 📢 Hindi fallback responses are used when appropriate
+🔄 Hindi question is translated into English
 
-This **translation-layer architecture** enables multilingual support even on **low-resource systems**.
+🧠 Transcript-based reasoning is performed
 
----
+💬 Stable response is generated
 
-## 🏗 Architecture Design
+📢 Hindi fallback responses are used when appropriate
 
-### 📂 Project Structure
+This translation-layer architecture enables multilingual support even on low-resource systems.
 
-```
+🏗 Architecture Design
+📂 Project Structure
 Summariser/
 │
-├── bot.py           # Telegram bot logic and session handling
-├── transcript.py    # Transcript extraction using yt-dlp
-├── summarizer.py    # LLM interaction and structured prompts
-├── config.py        # Token and model configuration
+├── bot.py           → Telegram bot logic and session handling
+├── transcript.py    → Transcript extraction using yt-dlp
+├── summarizer.py    → LLM interaction and structured prompts
+├── config.py        → Token and model configuration
 └── README.md
-```
+🔄 System Flow
 
----
+1️⃣ User sends a YouTube link
+2️⃣ Transcript is extracted using yt-dlp
+3️⃣ Transcript is trimmed for memory efficiency
+4️⃣ Structured summary is generated using Ollama
+5️⃣ User asks follow-up questions
+6️⃣ Answers are generated using transcript context only
 
-### 🔄 System Flow
+⚙️ Model & Environment
+🧠 LLM Runtime
 
-1. User sends a **YouTube link**
-2. Transcript is extracted using **yt-dlp**
-3. Transcript is **trimmed** for memory efficiency
-4. Structured summary is generated using **Ollama**
-5. User asks follow-up questions
-6. Answers are generated using **transcript context only**
+🖥 Ollama (Local execution)
 
----
+🤖 Model Used
 
-## ⚙️ Model & Environment
+phi3 (2.2GB model)
 
-### 🧠 LLM Runtime
-- Ollama (Local execution)
+💻 System Constraints
 
-### 🤖 Model Used
-- phi3 (2.2GB model)
+RAM: 4GB
 
-### 💻 System Constraints
-- RAM: 4GB  
-- GPU: Not available  
-- OS: Windows  
+GPU: Not available
 
-### ⚠ Due to RAM limitations
+OS: Windows
 
-- Large models like **Mistral** or **LLaMA 3** were not used
-- Transcript length is trimmed for safe inference
-- Temperature reduced for deterministic output
+⚠ Due to RAM limitations:
 
-These decisions ensure **system stability and reliability**.
+❌ Large models like Mistral or LLaMA 3 were not used
 
----
+✂ Transcript length is trimmed for safe inference
 
-## 🔎 Transcript Retrieval Strategy
+🌡 Temperature reduced for deterministic output
+
+These decisions ensure system stability and reliability.
+
+🔎 Transcript Retrieval Strategy
 
 Transcript extraction is handled using:
 
-```bash
 yt-dlp --write-auto-sub
-```
 
 The system handles:
 
-- Invalid YouTube URLs
-- Missing transcripts
-- Empty subtitle files
-- Long transcripts
-- Command execution errors
+❌ Invalid YouTube URLs
+
+⚠ Missing transcripts
+
+📂 Empty subtitle files
+
+📜 Long transcripts
+
+⚙ Command execution errors
 
 Temporary subtitle files are removed after processing.
 
----
-
-## 🧠 Context Management
+🧠 Context Management
 
 Each Telegram user session is stored independently using:
 
-```python
 user_sessions[user_id]
-```
 
 This ensures:
 
-- 👥 Multiple users can interact simultaneously
-- 💬 Conversations remain contextual
-- 🔒 Sessions do not interfere with each other
+👥 Multiple users can interact simultaneously
 
----
+💬 Conversations remain contextual
 
-## 🎯 Q&A Grounding Strategy
+🔒 Sessions do not interfere with each other
+
+🎯 Q&A Grounding Strategy
 
 The model is explicitly instructed to:
 
-- Use only transcript information
-- Avoid outside knowledge
-- Refuse unrelated questions
-- Provide concise answers (3–5 lines)
+📄 Use only transcript information
 
-This ensures **reliable and grounded responses**.
+🚫 Avoid outside knowledge
 
----
+❌ Refuse unrelated questions
 
-## 🌍 Multi-language Design Decision
+✏ Provide concise answers (3–5 lines)
 
-Instead of forcing multilingual reasoning inside the model, a **translation-layer approach** was used:
+This ensures reliable and grounded responses.
 
-```
+🌍 Multi-language Design Decision
+
+Instead of forcing multilingual reasoning inside the model, a translation-layer approach was used:
+
 Hindi → English → Grounded reasoning → Response
-```
+Advantages:
 
-### Advantages
+✔ Better reliability with small models
 
-- ✔ Better reliability with small models  
-- ✔ Reduced hallucination risk  
-- ✔ Works well on low-resource systems  
-- ✔ Meets assignment flexibility requirements  
+✔ Reduced hallucination risk
 
----
+✔ Works well on low-resource systems
 
-## 🛠 Setup Instructions
+✔ Meets assignment flexibility requirements
 
-### 1️⃣ Install Ollama
+🛠 Setup Instructions
+1️⃣ Install Ollama
 
-Download from:  
+Download from:
 https://ollama.com
 
 Pull the model:
 
-```bash
 ollama pull phi3
-```
-
----
-
-### 2️⃣ Install Python Dependencies
+2️⃣ Install Python Dependencies
 
 Inside the project folder run:
 
-```bash
 pip install python-telegram-bot requests yt-dlp
-```
+3️⃣ Configure Telegram Bot
 
----
+Create a bot using BotFather on Telegram
 
-### 3️⃣ Configure Telegram Bot
+Copy the bot token
 
-- Create a bot using **BotFather** on Telegram
-- Copy the **bot token**
-- Add it inside:
+Add it inside:
 
-```
 config.py
-```
-
----
-
-### 4️⃣ Run the Bot
-
-```bash
+4️⃣ Run the Bot
 python bot.py
-```
+⚖ Design Trade-offs
 
----
+🧠 Lightweight model used due to 4GB RAM constraint
 
-## ⚖ Design Trade-offs
+✂ Transcript trimmed to reduce memory usage
 
-- 🧠 Lightweight model used due to **4GB RAM constraint**
-- ✂ Transcript trimmed to reduce memory usage
-- 🌡 Temperature reduced for structured output
-- 🌍 Translation layer used instead of full multilingual generation
-- ⚡ No embedding pipeline used to keep the system lightweight
+🌡 Temperature reduced for structured output
 
----
+🌍 Translation layer used instead of full multilingual generation
 
-## 🎥 Demo Flow
+⚡ No embedding pipeline used to keep the system lightweight
 
-- ▶ Start the bot
-- 🔗 Send a YouTube link
-- 📄 Receive structured summary
-- ❓ Ask contextual follow-up questions
-- 🇮🇳 Ask a question in Hindi
-- ⚠ Observe fallback when topic is not covered
+🎥 Demo Flow
 
----
+▶ Start the bot
 
-## 📌 Conclusion
+🔗 Send a YouTube link
+
+📄 Receive structured summary
+
+❓ Ask contextual follow-up questions
+
+🇮🇳 Ask a question in Hindi
+
+⚠ Observe fallback when topic is not covered
+
+📌 Conclusion
 
 This system demonstrates:
 
-- 🤖 Practical AI assistant development
-- 🧠 Structured prompt engineering
-- 📄 Grounded LLM usage
-- 👥 Multi-user session management
-- 💻 Hardware-aware architecture design
+🤖 Practical AI assistant development
 
-The solution is designed to be **stable, scalable, and production-conscious** even under constrained hardware resources.
+🧠 Structured prompt engineering
+
+📄 Grounded LLM usage
+
+👥 Multi-user session management
+
+💻 Hardware-aware architecture design
+
+The solution is designed to be stable, scalable, and production-conscious even under constrained hardware resources.
